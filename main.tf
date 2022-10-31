@@ -434,5 +434,16 @@ resource "datadog_dashboard" "memcached" {
       }
     }
   }
+
+  widget {
+    timeseries_definition {
+      title = "CPU Credit Balance"
+
+      request {
+        q            = "avg:aws.elasticache.cpucredit_balance{$cluster,$environment} by {cacheclusterid,cachenodeid}"
+        display_type = "line"
+      }
+    }
+  }
 }
 
